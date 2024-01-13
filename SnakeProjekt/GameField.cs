@@ -22,6 +22,14 @@ namespace SnakeProjekt
         basic_food,
         special_food
     }
+
+    enum CollisionType
+    {
+        none,
+        food,
+        collision
+    }
+
     /*
     //-----images filenames:--------
     string normalFood = "red-apple.png";
@@ -42,15 +50,17 @@ namespace SnakeProjekt
 
 
         public FieldState state { get; set; }
+        public CollisionType collision_type { get; set; }
 
-        public String image;
+         public String image;
 
 
         public temp_GameField()
         {
            state = FieldState.empty;
 
-            image = null;
+           collision_type = CollisionType.none;
+           image = null;
 
         }
     }
@@ -60,7 +70,7 @@ namespace SnakeProjekt
         public BodyField(bool head, string direction)
         {
             state = FieldState.body;
-
+            collision_type = CollisionType.collision;
 
             if (head)
             {
@@ -81,10 +91,9 @@ namespace SnakeProjekt
     class BasicFoodField : temp_GameField
     {
 
-        int score = 1;
-
         public BasicFoodField()
         {
+            collision_type = CollisionType.food;
             state = FieldState.basic_food;
             image = "red-apple.png";
 
@@ -95,17 +104,17 @@ namespace SnakeProjekt
     class SpecialFoodField : temp_GameField {
         static int timing { get; set; }
         // List<string> specialFood = new List<string> { "cake.png", "jello.png" };
-        int score = 5;
 
         public SpecialFoodField(int timingVal)
         {
+            collision_type = CollisionType.food;
             state = FieldState.special_food;
             image = "cake.png";
-
             timing = timingVal;
         }
         public SpecialFoodField()
         {
+            collision_type = CollisionType.food;
             state = FieldState.special_food;
             image = "cake.png";
 
