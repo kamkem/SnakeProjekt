@@ -34,6 +34,8 @@ namespace SnakeProjekt
         //movement direction
         int[] movementDirection = new int[] { 1, 0 };
 
+        int totalScore = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -71,6 +73,7 @@ namespace SnakeProjekt
 
 
             gameFields[3, 8] = new SpecialFoodField(15);
+            gameFields[2, 10] = new BasicFoodField();
 
         }
 
@@ -99,30 +102,42 @@ namespace SnakeProjekt
             int[] new_head = { head[0] + movementDirection[0], head[1] + movementDirection[1] };
 
             //move outside the board
-
+            
             if (new_head[0] < 0) { new_head[0] = board_x-1; }
             else if (new_head[0] == board_x) { new_head[0] = 0; }
             else if (new_head[1] < 0) { new_head[1] = board_y-1; }
             else if (new_head[1] == board_y) { new_head[1] = 0; }
 
 
+            if (gameFields[new_head[0], new_head[1]].collision_type == CollisionType.collision)
+            {
+                gameOver();
+                return;
+            }
 
-            //last element
-            int[] element = bodyFields[bodyFields.Count - 1];
-            gameFields[element[0], element[1]] = new temp_GameField();
-            bodyFields.RemoveAt(bodyFields.Count - 1);
+            //check if food is next?
 
-            //first element
-            element = bodyFields[0];
-            gameFields[element[0], element[1]] = new BodyField(false, "placeholder");
+            if(gameFields[new_head[0], new_head[1]].collision_type == CollisionType.food)
+            {
+                //add score
+                if (gameFields[new_head[0], new_head[1]].state == FieldState.basic_food) { totalScore += 1; }
+                else if (gameFields[new_head[0], new_head[1]].state == FieldState.special_food) { totalScore += 5; }
+            }
+            else
+            {
+                //remove last bodyfield to move the snake
+                int[] lastElement = bodyFields[bodyFields.Count - 1];
+                gameFields[lastElement[0], lastElement[1]] = new temp_GameField();
+                bodyFields.RemoveAt(bodyFields.Count - 1);
+            }
 
-            //move the head
-            //int[] new_head = { element[0] + movementDirection[0], element[1] + movementDirection[1] };
+
+            //old head becomes "normal" body
+            gameFields[head[0], head[1]] = new BodyField(false, "placeholder");
 
             bodyFields.Insert(0, new_head);
             gameFields[new_head[0], new_head[1]] = new BodyField(true, "placeholder");
-            //}
-            //catch (Exception ex) { }
+
         }
 
         private void DrawSnake()
@@ -134,6 +149,7 @@ namespace SnakeProjekt
                 gameFields[raw, column].state = FieldState.body;
             }
         }
+
 
         private void checkFieldsState()
         {
