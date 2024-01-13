@@ -67,6 +67,9 @@ namespace SnakeProjekt
 
     class BodyField : temp_GameField
     {
+
+        string direction;
+
         public BodyField(bool head, string direction)
         {
             state = FieldState.body;
@@ -75,11 +78,9 @@ namespace SnakeProjekt
             if (head)
             {
                 image = "head_ph.png";
-               // color = Colors.Blue;
             }
             else
             {
-                //color = Colors.Green;
                 image = "body_ph.png";
             }
             
@@ -105,30 +106,13 @@ namespace SnakeProjekt
         static int timing { get; set; }
         // List<string> specialFood = new List<string> { "cake.png", "jello.png" };
 
-        public SpecialFoodField(int timingVal)
-        {
-            collision_type = CollisionType.food;
-            state = FieldState.special_food;
-            image = "cake.png";
-            timing = timingVal;
-        }
+
+        //just one constructor:
         public SpecialFoodField()
         {
             collision_type = CollisionType.food;
             state = FieldState.special_food;
             image = "cake.png";
-
-            countdown();
-            
-        }
-
-        void countdown()
-        {
-            if (timing <= 0) { state = FieldState.empty; }
-            else
-            {
-                timing--;
-            }
         }
 
     }

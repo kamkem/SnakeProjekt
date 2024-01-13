@@ -16,5 +16,6 @@
         <Label x:Name="label_score" Content="0000" HorizontalAlignment="Left" Margin="96,13,0,0" VerticalAlignment="Top" FontSize="20"/>
         <Label x:Name="High_score_title" Content="High score:" HorizontalAlignment="Left" Margin="238,13,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Comic Sans MS" FontWeight="Bold"/>
         <Label x:Name="label_high_score" Content="1000000" HorizontalAlignment="Left" Margin="371,17,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <Label x:Name="label_specialFoodTimer" Content="dssad" HorizontalAlignment="Left" Margin="661,3,0,0" VerticalAlignment="Top" Height="47" Width="69" FontSize="20"/>
     </Grid>
 </Window>

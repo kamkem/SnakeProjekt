@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Net.Http.Headers;
 using System.Printing;
 using System.Text;
@@ -35,6 +36,11 @@ namespace SnakeProjekt
         int[] movementDirection = new int[] { 1, 0 };
 
         int totalScore = 0;
+        int? specialFoodTimer;
+        bool isBasicFood = true;
+        bool isSpecialFood = false;
+
+        Random rnd = new Random();
 
         public MainWindow()
         {
@@ -72,7 +78,7 @@ namespace SnakeProjekt
             DrawSnake();
 
 
-            gameFields[3, 8] = new SpecialFoodField(15);
+            //gameFields[3, 8] = new SpecialFoodField(15);
             gameFields[2, 10] = new BasicFoodField();
 
         }
@@ -80,8 +86,7 @@ namespace SnakeProjekt
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
 
-            //Random rnd = new Random();
-            //gameFields[rnd.Next(10), rnd.Next(1)].state = FieldState.basic_food;
+
             MoveSnake();
             checkFieldsState();
             RedrawGrid();
@@ -119,9 +124,11 @@ namespace SnakeProjekt
 
             if(gameFields[new_head[0], new_head[1]].collision_type == CollisionType.food)
             {
-                //add score
-                if (gameFields[new_head[0], new_head[1]].state == FieldState.basic_food) { totalScore += 1; }
-                else if (gameFields[new_head[0], new_head[1]].state == FieldState.special_food) { totalScore += 5; }
+                //add score and set flags
+                if (gameFields[new_head[0], new_head[1]].state == FieldState.basic_food) { totalScore += 1; isBasicFood = false; }
+                else if (gameFields[new_head[0], new_head[1]].state == FieldState.special_food) { totalScore += 5; isSpecialFood = false; }
+                label_score.Content = totalScore.ToString();
+                
             }
             else
             {
@@ -135,6 +142,7 @@ namespace SnakeProjekt
             //old head becomes "normal" body
             gameFields[head[0], head[1]] = new BodyField(false, "placeholder");
 
+            //add new head
             bodyFields.Insert(0, new_head);
             gameFields[new_head[0], new_head[1]] = new BodyField(true, "placeholder");
 
@@ -158,12 +166,55 @@ namespace SnakeProjekt
                 for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
                     if (gameFields[row, column].state == FieldState.basic_food) { gameFields[row, column] = new BasicFoodField(); }
-                    if (gameFields[row, column].state == FieldState.special_food) { gameFields[row, column] = new SpecialFoodField(); }
                     if (gameFields[row, column].state == FieldState.empty) { gameFields[row, column] = new temp_GameField(); }
+                    if (gameFields[row, column].state == FieldState.special_food)
+                    {
+                        if (specialFoodTimer > 0) 
+                        { 
+                            gameFields[row, column] = new SpecialFoodField();
+                            specialFoodTimer--;
+                        }
+                        else { 
+                            gameFields[row, column] = new temp_GameField(); 
+                            isSpecialFood = false;
+                            specialFoodTimer = null; 
+                        }
+                        label_specialFoodTimer.Content = specialFoodTimer.ToString();
+                    }
                     //if (gameFields[row, column].state == FieldState.body) { gameFields[row, column] = new BodyField(); }
                     //DrawSnake();
                 }
             }
+
+            //change to delegates!
+            if(!isBasicFood)
+            {
+                addFood(FieldState.basic_food);
+                isBasicFood = true;
+            }
+            if (!isSpecialFood)
+            {
+               if (rnd.Next(100) < 5) //spawn with probability 5%
+                {
+                    addFood(FieldState.special_food);
+                    isSpecialFood = true;
+                    specialFoodTimer = 20;
+                }
+            }
+        }
+
+        private void addFood(FieldState foodType)
+        {
+
+            int[] randomField = [rnd.Next(board_x), rnd.Next(board_y)];
+
+            while (gameFields[randomField[0], randomField[1]].state != FieldState.empty)
+            {
+                randomField = [rnd.Next(board_x), rnd.Next(board_y)];
+            }
+
+            gameFields[randomField[0], randomField[1]].state = foodType;
+
         }
 
         private void gameOver()
@@ -197,19 +248,7 @@ namespace SnakeProjekt
                     
                         GameCanvas.Children.Add(imageControl);
                     }
-                    /*
-                    rect = new System.Windows.Shapes.Rectangle();
 
-                    rect.Stroke = new SolidColorBrush(Colors.Black);
-
-                    rect.Fill = new SolidColorBrush(gameFields[row, column].color);
-
-                    rect.Width = 50;
-                    rect.Height = 50;
-                    Canvas.SetLeft(rect, row * 50); ;
-                    Canvas.SetTop(rect, column * 50);
-                    GameCanvas.Children.Add(rect);
-                    */
                 }
             }
         }
