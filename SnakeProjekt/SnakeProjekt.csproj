@@ -12,10 +12,15 @@
     <None Remove="red-apple.png" />
     <None Remove="Resources\body_ph.png" />
     <None Remove="Resources\cake.png" />
+    <None Remove="Resources\crate1_diffuse.png" />
     <None Remove="Resources\head_ph.png" />
     <None Remove="Resources\jello.png" />
     <None Remove="Resources\red-apple.png" />
     <None Remove="Resources\sizeGrassSnake.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\crate1_diffuse.png" />
   </ItemGroup>
 
   <ItemGroup>

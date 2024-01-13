@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
 using System.Net.Http.Headers;
 using System.Printing;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace SnakeProjekt
 {
@@ -76,6 +78,11 @@ namespace SnakeProjekt
 
 
             DrawSnake();
+
+            for (int i = 3; i < 8; i++)
+            {
+                gameFields[15, i] = new WallField();
+            }
 
 
             //gameFields[3, 8] = new SpecialFoodField(15);
@@ -166,6 +173,7 @@ namespace SnakeProjekt
                 for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
                     if (gameFields[row, column].state == FieldState.basic_food) { gameFields[row, column] = new BasicFoodField(); }
+                    if (gameFields[row, column].state == FieldState.wall) { gameFields[row, column] = new WallField(); }
                     if (gameFields[row, column].state == FieldState.empty) { gameFields[row, column] = new temp_GameField(); }
                     if (gameFields[row, column].state == FieldState.special_food)
                     {
@@ -219,13 +227,39 @@ namespace SnakeProjekt
 
         private void gameOver()
         {
+
+            /*
+            Label label_gameOver = new Label()
+            {
+                Name = "label_gameOver",
+                Width = board_x,
+                Height = board_y,
+                Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 100)),
+                Content = "Game over!",
+                Foreground = new SolidColorBrush(Color.FromRgb(225, 225, 225)),
+                FontSize = 50
+        };
+
+            GameCanvas.Children.Clear();
+            GameCanvas.Children.Add(label_gameOver);
+            */
+
+            label_specialFoodTimer.Content = "lskjfsd";
+            GameCanvas.Children.Clear();
+            /*TextBlock textBlock = new TextBlock();
+            textBlock.Text = "text";
+            //textBlock.Foreground = new SolidColorBrush(Color.FromArgb(0, 0, 0, 100));
+            Canvas.SetLeft(textBlock, 10);
+            Canvas.SetTop(textBlock, 10);
+            GameCanvas.Children.Add(textBlock);*/
+            GameCanvas.UpdateLayout();
+
             dispatcherTimer.Stop();
         }
 
         public void RedrawGrid()
         {
             GameCanvas.Children.Clear();
-            System.Windows.Shapes.Rectangle rect;
             for (int column = 0; column < gameFields.GetLength(1); column++)
             {
                 for (int row = 0; row < gameFields.GetLength(0); row++)
@@ -244,8 +278,7 @@ namespace SnakeProjekt
                             Height = 50,
                             Margin = new Thickness(row * 50, column * 50, 0, 0)
                         };
-                    
-                    
+
                         GameCanvas.Children.Add(imageControl);
                     }
 

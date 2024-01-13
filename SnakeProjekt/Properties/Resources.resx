@@ -124,6 +124,9 @@
   <data name="cake" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cake.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="crate1_diffuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\crate1_diffuse.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="head_ph" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\head_ph.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

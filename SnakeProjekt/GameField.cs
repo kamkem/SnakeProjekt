@@ -44,6 +44,11 @@ namespace SnakeProjekt
         };
     //-----------------------------
     */
+
+
+    /// <summary>
+    /// ///////////////////////////////////CHANGE TO ONE CLASS - WITH STRUCT?????
+    /// </summary>
     class temp_GameField
     {
 
@@ -86,7 +91,6 @@ namespace SnakeProjekt
             
         }
 
-
     }
 
     class BasicFoodField : temp_GameField
@@ -103,7 +107,6 @@ namespace SnakeProjekt
     }
 
     class SpecialFoodField : temp_GameField {
-        static int timing { get; set; }
         // List<string> specialFood = new List<string> { "cake.png", "jello.png" };
 
 
@@ -117,40 +120,15 @@ namespace SnakeProjekt
 
     }
 
-}
 
-
-
-    /*
-
-    class GameField : Image
+    class WallField : temp_GameField
     {
 
-        public int state { get; set; } //0 - empty, 1-body - change to enum or sth
-
-
-        public GameField(int stateVal)
+        public WallField()
         {
-            state = stateVal;
-            changeProperties();
-            this.Visibility = System.Windows.Visibility.Visible;
-
-        }
-
-
-        //add subscriber - state changed!!!
-
-        private void changeProperties()
-        {
-            //   ResourceManager rm = Resources.ResourceManager;
-            if (state == 0)
-            {
-                this.Source = (ImageSource)Resources["empty.png"];
-            }
-            else
-            {
-                this.Source = (ImageSource)Resources["body.png"];
-            }
+            collision_type = CollisionType.collision;
+            state = FieldState.wall;
+            image = "crate1_diffuse.png";
         }
     }
-        */
+}
