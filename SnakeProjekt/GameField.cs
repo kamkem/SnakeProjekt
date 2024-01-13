@@ -9,6 +9,7 @@ using System.Threading.Tasks.Sources;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 //using static System.Net.Mime.MediaTypeNames;
 
 namespace SnakeProjekt
@@ -30,55 +31,56 @@ namespace SnakeProjekt
         collision
     }
 
-    /*
-    //-----images filenames:--------
-    string normalFood = "red-apple.png";
-    List<string> specialFood = new List<string> { "cake.png", "jello.png" };
-
-    static Dictionary<string, string> snakeBody = new Dictionary<string, string>
-        {
-        {"head", "head_ph.png"},
-        {"body", "body_ph.png"},
-        {"tail", "tail.png"},
-        {"curve", "curve.png" }
-        };
-    //-----------------------------
-    */
 
 
-    /// <summary>
-    /// ///////////////////////////////////CHANGE TO ONE CLASS - WITH STRUCT?????
-    /// </summary>
-    class temp_GameField
+
+
+    class GameField
     {
-
-
-
-        public FieldState state { get; set; }
-        public CollisionType collision_type { get; set; }
-
+         public FieldState state { get; set; }
+         public CollisionType collision_type { get; set; }
          public String image;
 
-
-        public temp_GameField()
+        public GameField(FieldState state)
         {
-           state = FieldState.empty;
+            this.state = state;
 
-           collision_type = CollisionType.none;
-           image = null;
-
+            switch (state)
+            {
+                case FieldState.wall:
+                    collision_type = CollisionType.collision;
+                    image = "crate1_diffuse.png";
+                    break;
+                case FieldState.basic_food:
+                    collision_type = CollisionType.food;
+                    image = "red-apple.png";
+                    break;
+                case FieldState.special_food:
+                    collision_type = CollisionType.food;
+                    image = "cake.png";
+                    break;
+                case FieldState.body:
+                    collision_type = CollisionType.collision;
+                    image = null;
+                    break;
+            }
         }
+
+        public GameField()
+        {
+            this.state = FieldState.empty;
+            collision_type = CollisionType.none;
+            image = null;
+        }
+
     }
 
-    class BodyField : temp_GameField
+    class BodyField : GameField
     {
-
         string direction;
 
-        public BodyField(bool head, string direction)
+        public BodyField(bool head, string direction) : base(FieldState.body) 
         {
-            state = FieldState.body;
-            collision_type = CollisionType.collision;
 
             if (head)
             {
@@ -88,47 +90,8 @@ namespace SnakeProjekt
             {
                 image = "body_ph.png";
             }
-            
-        }
 
-    }
-
-    class BasicFoodField : temp_GameField
-    {
-
-        public BasicFoodField()
-        {
-            collision_type = CollisionType.food;
-            state = FieldState.basic_food;
-            image = "red-apple.png";
-
-        }
-
-    }
-
-    class SpecialFoodField : temp_GameField {
-        // List<string> specialFood = new List<string> { "cake.png", "jello.png" };
-
-
-        //just one constructor:
-        public SpecialFoodField()
-        {
-            collision_type = CollisionType.food;
-            state = FieldState.special_food;
-            image = "cake.png";
-        }
-
-    }
-
-
-    class WallField : temp_GameField
-    {
-
-        public WallField()
-        {
-            collision_type = CollisionType.collision;
-            state = FieldState.wall;
-            image = "crate1_diffuse.png";
         }
     }
 }
+
