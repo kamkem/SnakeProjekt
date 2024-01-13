@@ -91,39 +91,36 @@ namespace SnakeProjekt
 
         private void MoveSnake()
         {
-            //try//delete trycatch? bo muli?
-            //{
 
-                //tymczasowe:
-               //if (bodyFields[0][0] == 8) { dispatcherTimer.Stop(); }
+            //if (bodyFields[0][0] == 8) { dispatcherTimer.Stop(); }
 
 
-                int[] head = bodyFields[0];
-                int[] new_head = { head[0] + movementDirection[0], head[1] + movementDirection[1] };
-                //check collision
-                if (new_head[0] < 0 || new_head[0] == board_x || new_head[1] < 0 || new_head[1] == board_y)
-                {
-                    gameOver();
+            int[] head = bodyFields[0];
+            int[] new_head = { head[0] + movementDirection[0], head[1] + movementDirection[1] };
 
-                    //dispatcherTimer.Stop();
-                    return;
-                }
+            //move outside the board
+
+            if (new_head[0] < 0) { new_head[0] = board_x-1; }
+            else if (new_head[0] == board_x) { new_head[0] = 0; }
+            else if (new_head[1] < 0) { new_head[1] = board_y-1; }
+            else if (new_head[1] == board_y) { new_head[1] = 0; }
 
 
-                //last element
-                int[] element = bodyFields[bodyFields.Count - 1];
-                gameFields[element[0], element[1]] = new temp_GameField();
-                bodyFields.RemoveAt(bodyFields.Count - 1);
 
-                //first element
-                element = bodyFields[0];
-                gameFields[element[0], element[1]] = new BodyField(false, "placeholder");
+            //last element
+            int[] element = bodyFields[bodyFields.Count - 1];
+            gameFields[element[0], element[1]] = new temp_GameField();
+            bodyFields.RemoveAt(bodyFields.Count - 1);
 
-                //move the head
-                //int[] new_head = { element[0] + movementDirection[0], element[1] + movementDirection[1] };
+            //first element
+            element = bodyFields[0];
+            gameFields[element[0], element[1]] = new BodyField(false, "placeholder");
 
-                bodyFields.Insert(0, new_head);
-                gameFields[new_head[0], new_head[1]] = new BodyField(true, "placeholder");
+            //move the head
+            //int[] new_head = { element[0] + movementDirection[0], element[1] + movementDirection[1] };
+
+            bodyFields.Insert(0, new_head);
+            gameFields[new_head[0], new_head[1]] = new BodyField(true, "placeholder");
             //}
             //catch (Exception ex) { }
         }
@@ -160,6 +157,7 @@ namespace SnakeProjekt
 
         public void RedrawGrid()
         {
+            GameCanvas.Children.Clear();
             System.Windows.Shapes.Rectangle rect;
             for (int column = 0; column < gameFields.GetLength(1); column++)
             {
