@@ -237,8 +237,6 @@ namespace SnakeProjekt
         {
 
             dispatcherTimer.Stop();
-
-            label_specialFoodTimer.Content = "lskjfsd";
             
             stackPanel_gameOver.Visibility = Visibility.Visible;
 
