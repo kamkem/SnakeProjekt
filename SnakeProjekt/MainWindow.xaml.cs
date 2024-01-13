@@ -174,25 +174,33 @@ namespace SnakeProjekt
                 for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
                     //change to swithc case
-                    if (gameFields[row, column].state == FieldState.basic_food) { gameFields[row, column] = new GameField(FieldState.basic_food); }
-                    if (gameFields[row, column].state == FieldState.wall) { gameFields[row, column] = new GameField(FieldState.wall); }
-                    if (gameFields[row, column].state == FieldState.empty) { gameFields[row, column] = new GameField(); }
+                    FieldState state = gameFields[row, column].state;
 
-
-
-                    if (gameFields[row, column].state == FieldState.special_food)
+                    switch (state)
                     {
-                        if (specialFoodTimer > 0) 
-                        { 
-                            gameFields[row, column] = new GameField(FieldState.special_food);
-                            specialFoodTimer--;
-                        }
-                        else { 
-                            gameFields[row, column] = new GameField(); 
-                            isSpecialFood = false;
-                            specialFoodTimer = null; 
-                        }
-                        label_specialFoodTimer.Content = specialFoodTimer.ToString();
+                        case FieldState.empty:
+                            gameFields[row, column] = new GameField();
+                            break;
+                        case FieldState.wall:
+                            gameFields[row, column] = new GameField(FieldState.wall);
+                            break;
+                        case FieldState.basic_food:
+                            gameFields[row, column] = new GameField(FieldState.basic_food);
+                            break;
+                        case FieldState.special_food:
+                            if (specialFoodTimer > 0)
+                            {
+                                gameFields[row, column] = new GameField(FieldState.special_food);
+                                specialFoodTimer--;
+                            }
+                            else
+                            {
+                                gameFields[row, column] = new GameField();
+                                isSpecialFood = false;
+                                specialFoodTimer = null;
+                            }
+                            label_specialFoodTimer.Content = specialFoodTimer.ToString();
+                            break;
                     }
 
                 }
@@ -305,7 +313,7 @@ namespace SnakeProjekt
             else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; }
             else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; }
             
-            if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1) //to change - check head direction!
+            if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1) //to change - check head direction or wait until next step!!
             {
                 movementDirection = newMovement;
             }
