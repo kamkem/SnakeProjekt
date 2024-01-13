@@ -43,19 +43,13 @@ namespace SnakeProjekt
 
         public FieldState state { get; set; }
 
-        //public Image image { get; set; }
         public String image;
 
-        public int score { get; set; }
-
-       // public Color color { get; set; }
 
         public temp_GameField()
         {
            state = FieldState.empty;
-            //image =
-            //color = Colors.Transparent;//Colors.GreenYellow;
-            score = 0;
+
             image = null;
 
         }
@@ -66,9 +60,7 @@ namespace SnakeProjekt
         public BodyField(bool head, string direction)
         {
             state = FieldState.body;
-            score = 0;
 
-            //image = "red-apple.png";
 
             if (head)
             {
@@ -89,35 +81,34 @@ namespace SnakeProjekt
     class BasicFoodField : temp_GameField
     {
 
+        int score = 1;
+
         public BasicFoodField()
         {
             state = FieldState.basic_food;
             image = "red-apple.png";
-           // color = Colors.IndianRed;
-            score = 1;
+
         }
 
     }
 
     class SpecialFoodField : temp_GameField {
         static int timing { get; set; }
-       // List<string> specialFood = new List<string> { "cake.png", "jello.png" };
-
+        // List<string> specialFood = new List<string> { "cake.png", "jello.png" };
+        int score = 5;
 
         public SpecialFoodField(int timingVal)
         {
             state = FieldState.special_food;
             image = "cake.png";
-            //color = Colors.DarkRed;
-            score = 5;
+
             timing = timingVal;
         }
         public SpecialFoodField()
         {
             state = FieldState.special_food;
             image = "cake.png";
-            //color = Colors.DarkRed;
-            score = 5;
+
             countdown();
             
         }
