@@ -100,10 +100,6 @@ namespace SnakeProjekt
             RedrawGrid();
         }
 
-        private void generateSpecialFood()
-        {
-
-        }
 
         private void MoveSnake()
         {
@@ -240,33 +236,17 @@ namespace SnakeProjekt
         private void gameOver()
         {
 
-            /*
-            Label label_gameOver = new Label()
-            {
-                Name = "label_gameOver",
-                Width = board_x,
-                Height = board_y,
-                Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 100)),
-                Content = "Game over!",
-                Foreground = new SolidColorBrush(Color.FromRgb(225, 225, 225)),
-                FontSize = 50
-        };
-
-            GameCanvas.Children.Clear();
-            GameCanvas.Children.Add(label_gameOver);
-            */
+            dispatcherTimer.Stop();
 
             label_specialFoodTimer.Content = "lskjfsd";
-            GameCanvas.Children.Clear();
-            /*TextBlock textBlock = new TextBlock();
-            textBlock.Text = "text";
-            //textBlock.Foreground = new SolidColorBrush(Color.FromArgb(0, 0, 0, 100));
-            Canvas.SetLeft(textBlock, 10);
-            Canvas.SetTop(textBlock, 10);
-            GameCanvas.Children.Add(textBlock);*/
-            GameCanvas.UpdateLayout();
+            
+            stackPanel_gameOver.Visibility = Visibility.Visible;
 
-            dispatcherTimer.Stop();
+            //tymczasowe:
+            bool isHighScore = true;
+
+            if(isHighScore) { stackHighScore.Visibility = Visibility.Visible; }
+
         }
 
         public void RedrawGrid()
@@ -298,11 +278,6 @@ namespace SnakeProjekt
             }
         }
 
-        public void NewDrawGrid()
-        {
-
-        }
-
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
@@ -313,7 +288,7 @@ namespace SnakeProjekt
             else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; }
             else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; }
             
-            if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1) //to change - check head direction or wait until next step!!
+            if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1) //to change - check head direction or wait until next step (threading)!!
             {
                 movementDirection = newMovement;
             }
