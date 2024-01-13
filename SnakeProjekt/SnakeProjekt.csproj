@@ -9,13 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\body.png" />
-    <None Remove="Resources\empty.png" />
+    <None Remove="red-apple.png" />
+    <None Remove="Resources\body_ph.png" />
+    <None Remove="Resources\cake.png" />
+    <None Remove="Resources\head_ph.png" />
+    <None Remove="Resources\jello.png" />
+    <None Remove="Resources\red-apple.png" />
+    <None Remove="Resources\sizeGrassSnake.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\body.png" />
-    <Resource Include="Resources\empty.png" />
+    <Resource Include="Resources\body_ph.png" />
+    <Resource Include="Resources\cake.png" />
+    <Resource Include="Resources\head_ph.png" />
+    <Resource Include="Resources\jello.png" />
+    <Resource Include="Resources\red-apple.png" />
+    <Resource Include="Resources\sizeGrassSnake.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -63,9 +63,9 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
-        internal static byte[] body {
+        internal static byte[] body_ph {
             get {
-                object obj = ResourceManager.GetObject("body", resourceCulture);
+                object obj = ResourceManager.GetObject("body_ph", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -73,9 +73,49 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
-        internal static byte[] empty {
+        internal static byte[] cake {
             get {
-                object obj = ResourceManager.GetObject("empty", resourceCulture);
+                object obj = ResourceManager.GetObject("cake", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] head_ph {
+            get {
+                object obj = ResourceManager.GetObject("head_ph", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] jello {
+            get {
+                object obj = ResourceManager.GetObject("jello", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] red_apple {
+            get {
+                object obj = ResourceManager.GetObject("red-apple", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] sizeGrassSnake {
+            get {
+                object obj = ResourceManager.GetObject("sizeGrassSnake", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Http.Headers;
+using System.Printing;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,67 +21,204 @@ namespace SnakeProjekt
 
     public partial class MainWindow : Window
     {
+
+        System.Windows.Threading.DispatcherTimer dispatcherTimer;
+
+        //declare 2d array with fields
+        static int board_x = 20;
+        static int board_y = 12;
+
+        temp_GameField[,] gameFields = new temp_GameField[board_x, board_y];
+        List<int[]> bodyFields = new List<int[]>();
+
+        //movement direction
+        int[] movementDirection = new int[] { 1, 0 };
+
         public MainWindow()
         {
             InitializeComponent();
 
-            temp_GameField[,] gameFields = new temp_GameField[10, 10];
+            //timer
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick; //event!!
+            dispatcherTimer.Interval = new TimeSpan(20, 0, 0);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+            dispatcherTimer.Start();
 
-            for (int column = 0; column < gameFields.GetLength(0); column++)
+            //initialize fields
+            for (int column = 0; column < gameFields.GetLength(1); column++)
             {
-                for (int row = 0; row < gameFields.GetLength(1); row++)
+                for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
-                    gameFields[row, column] = new temp_GameField(0);
+                    gameFields[row, column] = new temp_GameField();
                 }
             }
 
-            gameFields[2, 3].state = 1;
-            gameFields[2, 4].state = 1;
-            gameFields[2, 5].state = 1;
+            //initial snake body
+            int[] body = new int[] { 2, 5 };
+            bodyFields.Add(body);
+            body = new int[] { 2, 4 };
+            bodyFields.Add(body);
+            body = new int[] { 2, 3 };
+            bodyFields.Add(body);
+            body = new int[] { 2, 2 };
+            bodyFields.Add(body);
+            body = new int[] { 2, 1 };
+            bodyFields.Add(body);
 
 
+            DrawSnake();
 
-            System.Windows.Shapes.Rectangle rect;
+
+            gameFields[3, 8] = new SpecialFoodField(15);
+
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+
+            //Random rnd = new Random();
+            //gameFields[rnd.Next(10), rnd.Next(1)].state = FieldState.basic_food;
+            MoveSnake();
+            checkFieldsState();
+            RedrawGrid();
+        }
+
+        private void generateSpecialFood()
+        {
+
+        }
+
+        private void MoveSnake()
+        {
+            //try//delete trycatch? bo muli?
+            //{
+
+                //tymczasowe:
+               //if (bodyFields[0][0] == 8) { dispatcherTimer.Stop(); }
 
 
-            for (int column = 0; column < gameFields.GetLength(0); column++)
-            {
-                for(int row = 0; row < gameFields.GetLength(1); row++)
+                int[] head = bodyFields[0];
+                int[] new_head = { head[0] + movementDirection[0], head[1] + movementDirection[1] };
+                //check collision
+                if (new_head[0] < 0 || new_head[0] == board_x || new_head[1] < 0 || new_head[1] == board_y)
                 {
-                    
+                    gameOver();
 
+                    //dispatcherTimer.Stop();
+                    return;
+                }
+
+
+                //last element
+                int[] element = bodyFields[bodyFields.Count - 1];
+                gameFields[element[0], element[1]] = new temp_GameField();
+                bodyFields.RemoveAt(bodyFields.Count - 1);
+
+                //first element
+                element = bodyFields[0];
+                gameFields[element[0], element[1]] = new BodyField(false, "placeholder");
+
+                //move the head
+                //int[] new_head = { element[0] + movementDirection[0], element[1] + movementDirection[1] };
+
+                bodyFields.Insert(0, new_head);
+                gameFields[new_head[0], new_head[1]] = new BodyField(true, "placeholder");
+            //}
+            //catch (Exception ex) { }
+        }
+
+        private void DrawSnake()
+        {
+            foreach (int[] field in bodyFields)
+            {
+                int raw = field[0];
+                int column = field[1];
+                gameFields[raw, column].state = FieldState.body;
+            }
+        }
+
+        private void checkFieldsState()
+        {
+            for (int column = 0; column < gameFields.GetLength(1); column++)
+            {
+                for (int row = 0; row < gameFields.GetLength(0); row++)
+                {
+                    if (gameFields[row, column].state == FieldState.basic_food) { gameFields[row, column] = new BasicFoodField(); }
+                    if (gameFields[row, column].state == FieldState.special_food) { gameFields[row, column] = new SpecialFoodField(); }
+                    if (gameFields[row, column].state == FieldState.empty) { gameFields[row, column] = new temp_GameField(); }
+                    //if (gameFields[row, column].state == FieldState.body) { gameFields[row, column] = new BodyField(); }
+                    //DrawSnake();
+                }
+            }
+        }
+
+        private void gameOver()
+        {
+            dispatcherTimer.Stop();
+        }
+
+        public void RedrawGrid()
+        {
+            System.Windows.Shapes.Rectangle rect;
+            for (int column = 0; column < gameFields.GetLength(1); column++)
+            {
+                for (int row = 0; row < gameFields.GetLength(0); row++)
+                {
+
+                    if (gameFields[row,column].state == FieldState.empty) { continue; } //skip empty fields
+
+                    if (gameFields[row,column].image != null)
+                    {
+                        BitmapImage bitmapImage = new BitmapImage(new Uri("pack://application:,,,/SnakeProjekt;component/Resources/" + gameFields[row,column].image));
+
+                        Image imageControl = new Image
+                        {
+                            Source = bitmapImage,
+                            Width = 50,
+                            Height = 50,
+                            Margin = new Thickness(row * 50, column * 50, 0, 0)
+                        };
+                    
+                    
+                        GameCanvas.Children.Add(imageControl);
+                    }
+                    /*
                     rect = new System.Windows.Shapes.Rectangle();
 
                     rect.Stroke = new SolidColorBrush(Colors.Black);
-                    rect.Fill = new SolidColorBrush(Colors.GreenYellow);
 
-                    if (gameFields[row, column].state == 1)
-                    {
-                        rect.Fill = new SolidColorBrush(Colors.Blue);
-                    }
-                    
+                    rect.Fill = new SolidColorBrush(gameFields[row, column].color);
 
                     rect.Width = 50;
                     rect.Height = 50;
                     Canvas.SetLeft(rect, row * 50); ;
-                    Canvas.SetTop(rect, column*50);
+                    Canvas.SetTop(rect, column * 50);
                     GameCanvas.Children.Add(rect);
-                    
-                    
-
-
-                    
-                    //Canvas.SetTop(gameFields[row, column], column*50);
-                    //Canvas.SetLeft(gameFields[row, column], row*50);
-
-                    //GameCanvas.Children.Add(gameFields[row, column]);
-
-                    // gameFields[row, column].Margin = new Thickness(row*50, column*50, 0, 0);
+                    */
                 }
             }
+        }
+
+        public void NewDrawGrid()
+        {
+
+        }
 
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
 
+            int[] newMovement = new int[2];
+            if (e.Key == Key.Down) {newMovement[0] = 0; newMovement[1] = 1;}
+            else if (e.Key == Key.Up) { newMovement[0] = 0; newMovement[1] = -1; }
+            else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; }
+            else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; }
+            
+            if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1) 
+            {
+                movementDirection = newMovement;
+            }
         }
     }
 }
