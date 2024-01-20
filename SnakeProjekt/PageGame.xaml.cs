@@ -95,10 +95,6 @@ namespace SnakeProjekt
             RedrawGrid();
         }
 
-        private void generateSpecialFood()
-        {
-
-        }
 
         private void MoveSnake()
         {
@@ -129,7 +125,7 @@ namespace SnakeProjekt
             {
                 //add score and set flags
                 if (gameFields[new_head[0], new_head[1]].state == FieldState.basic_food) { totalScore += 1; isBasicFood = false; }
-                else if (gameFields[new_head[0], new_head[1]].state == FieldState.special_food) { totalScore += 5; isSpecialFood = false; }
+                else if (gameFields[new_head[0], new_head[1]].state == FieldState.special_food) { totalScore += 5; isSpecialFood = false; label_specialFoodTimer.Content = ""; }
                 label_score.Content = totalScore.ToString();
 
             }
@@ -225,30 +221,9 @@ namespace SnakeProjekt
         private void gameOver()
         {
 
-            /*
-            Label label_gameOver = new Label()
-            {
-                Name = "label_gameOver",
-                Width = board_x,
-                Height = board_y,
-                Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 100)),
-                Content = "Game over!",
-                Foreground = new SolidColorBrush(Color.FromRgb(225, 225, 225)),
-                FontSize = 50
-        };
-
-            GameCanvas.Children.Clear();
-            GameCanvas.Children.Add(label_gameOver);
-            */
 
             label_specialFoodTimer.Content = "lskjfsd";
             GameCanvas.Children.Clear();
-            /*TextBlock textBlock = new TextBlock();
-            textBlock.Text = "text";
-            //textBlock.Foreground = new SolidColorBrush(Color.FromArgb(0, 0, 0, 100));
-            Canvas.SetLeft(textBlock, 10);
-            Canvas.SetTop(textBlock, 10);
-            GameCanvas.Children.Add(textBlock);*/
             GameCanvas.UpdateLayout();
 
             dispatcherTimer.Stop();
@@ -282,13 +257,6 @@ namespace SnakeProjekt
                 }
             }
         }
-
-        public void NewDrawGrid()
-        {
-
-        }
-
-
 
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
