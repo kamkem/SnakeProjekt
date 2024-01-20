@@ -1,0 +1,23 @@
+﻿<Page x:Class="SnakeProjekt.PageGame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SnakeProjekt"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1054"
+      Title="PageGame" KeyDown="Page_KeyDown">
+
+    <Grid x:Name="pageGame" Background="White">
+        <Canvas x:Name="GameCanvas" HorizontalAlignment="Center" Height="604" VerticalAlignment="Top" Width="1000" Margin="0,50,0,0" Focusable="True">
+    <Canvas.Background>
+        <ImageBrush ImageSource="/Resources/sizeGrassSnake.png"/>
+    </Canvas.Background>
+</Canvas>
+<Label x:Name="Score_title" Content="Score:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="81" FontSize="22" FontWeight="Bold" FontFamily="Comic Sans MS"/>
+<Label x:Name="label_score" Content="0000" HorizontalAlignment="Left" Margin="96,13,0,0" VerticalAlignment="Top" FontSize="20"/>
+<Label x:Name="High_score_title" Content="High score:" HorizontalAlignment="Left" Margin="238,13,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+<Label x:Name="label_high_score" Content="1000000" HorizontalAlignment="Left" Margin="371,17,0,0" VerticalAlignment="Top" FontSize="20"/>
+<Label x:Name="label_specialFoodTimer" Content="dssad" HorizontalAlignment="Left" Margin="661,3,0,0" VerticalAlignment="Top" Height="47" Width="69" FontSize="20"/>
+    </Grid>
+</Page>
