@@ -22,15 +22,34 @@ namespace SnakeProjekt
     /// </summary>
     /// 
 
+    public enum GameMap
+    {
+        Empty,
+        Borders,
+        Tunnel,
+        Star
+    };
+
+    class GameProperties
+    {
+        public static int level = 5;
+        public static GameMap gameMapSelected;
+    }
+
     public partial class MainWindow : Window
     {
 
+        //public int level;
+        //public static GameMap gameMapSelected;
 
         public MainWindow()
         {
             InitializeComponent();
 
             _mainFrame.Navigate(new PageMenu());
+
+            GameProperties.level = 5;
+            GameProperties.gameMapSelected = GameMap.Empty;
 
         }
 

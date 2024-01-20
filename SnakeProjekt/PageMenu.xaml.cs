@@ -28,6 +28,13 @@ namespace SnakeProjekt
         private void buttonGame_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("PageGame.xaml", UriKind.Relative));
+
+
+        }
+
+        private void buttonSettings_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("SettingsPage.xaml", UriKind.Relative));
         }
     }
 }
