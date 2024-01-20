@@ -43,14 +43,15 @@ namespace SnakeProjekt
         {
             InitializeComponent();
 
+            GameCanvas.Focus();
+
+            int timerTick = 800 / GameProperties.level;
             //timer
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick; //event!!
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(20, 0, 0);
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
-            dispatcherTimer.Start();
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(timerTick);
 
-            GameCanvas.Focus();
 
             //initialize fields
             for (int column = 0; column < gameFields.GetLength(1); column++)
@@ -61,6 +62,7 @@ namespace SnakeProjekt
                 }
             }
 
+            //TO CHECK!
             //initial snake body
             int[] body = new int[] { 2, 5 };
             bodyFields.Add(body);
@@ -74,22 +76,22 @@ namespace SnakeProjekt
             bodyFields.Add(body);
 
 
-            DrawSnake();
+            // DrawSnake();
 
-            for (int i = 3; i < 8; i++)
-            {
-                gameFields[15, i] = new WallField();
-            }
+            setMap();
 
+            RedrawGrid();
+            RedrawGrid();
+            RedrawGrid();
 
-            //gameFields[3, 8] = new SpecialFoodField(15);
             gameFields[2, 10] = new BasicFoodField();
+
+            dispatcherTimer.Start();
+
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-
-
             MoveSnake();
             checkFieldsState();
             RedrawGrid();
@@ -98,9 +100,6 @@ namespace SnakeProjekt
 
         private void MoveSnake()
         {
-
-            //if (bodyFields[0][0] == 8) { dispatcherTimer.Stop(); }
-
 
             int[] head = bodyFields[0];
             int[] new_head = { head[0] + movementDirection[0], head[1] + movementDirection[1] };
@@ -147,17 +146,6 @@ namespace SnakeProjekt
 
         }
 
-        private void DrawSnake()
-        {
-            foreach (int[] field in bodyFields)
-            {
-                int raw = field[0];
-                int column = field[1];
-                gameFields[raw, column].state = FieldState.body;
-            }
-        }
-
-
         private void checkFieldsState()
         {
             for (int column = 0; column < gameFields.GetLength(1); column++)
@@ -182,8 +170,6 @@ namespace SnakeProjekt
                         }
                         label_specialFoodTimer.Content = specialFoodTimer.ToString();
                     }
-                    //if (gameFields[row, column].state == FieldState.body) { gameFields[row, column] = new BodyField(); }
-                    //DrawSnake();
                 }
             }
 
@@ -220,8 +206,6 @@ namespace SnakeProjekt
 
         private void gameOver()
         {
-
-
             label_specialFoodTimer.Content = "lskjfsd";
             GameCanvas.Children.Clear();
             GameCanvas.UpdateLayout();
@@ -269,6 +253,32 @@ namespace SnakeProjekt
             if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1)
             {
                 movementDirection = newMovement;
+            }
+        }
+
+        private void setMap()
+        {
+            switch (GameProperties.gameMapSelected)
+            {
+                case GameMap.Empty:
+                    break;
+                case GameMap.Borders:
+
+                    for (int i=0; i<board_x; i++)
+                    {
+                        gameFields[i, 0] = new WallField();
+                        gameFields[i, board_y-1] = new WallField();
+                    }
+                    for (int i=1; i<board_y-1; i++)
+                    {
+                        gameFields[0, i] = new WallField();
+                        gameFields[board_x-1, i] = new WallField();
+                    }
+                    break;
+                case GameMap.Tunnel:
+                    break;
+                case GameMap.Star:
+                    break;
             }
         }
     }
