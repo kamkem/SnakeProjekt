@@ -32,9 +32,6 @@ namespace SnakeProjekt
     }
 
 
-
-
-
     class GameField
     {
         public FieldState state { get; set; }

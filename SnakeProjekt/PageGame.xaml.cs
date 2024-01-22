@@ -26,7 +26,7 @@ namespace SnakeProjekt
         static int board_x = 20;
         static int board_y = 12;
 
-        temp_GameField[,] gameFields = new temp_GameField[board_x, board_y];
+        GameField[,] gameFields = new GameField[board_x, board_y];
         List<int[]> bodyFields = new List<int[]>();
 
         //movement direction
@@ -58,7 +58,7 @@ namespace SnakeProjekt
             {
                 for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
-                    gameFields[row, column] = new temp_GameField();
+                    gameFields[row, column] = new GameField();
                 }
             }
 
@@ -84,7 +84,7 @@ namespace SnakeProjekt
             RedrawGrid();
             RedrawGrid();
 
-            gameFields[2, 10] = new BasicFoodField();
+            gameFields[2, 10] = new GameField(FieldState.basic_food);
 
             dispatcherTimer.Start();
 
@@ -132,7 +132,7 @@ namespace SnakeProjekt
             {
                 //remove last bodyfield to move the snake
                 int[] lastElement = bodyFields[bodyFields.Count - 1];
-                gameFields[lastElement[0], lastElement[1]] = new temp_GameField();
+                gameFields[lastElement[0], lastElement[1]] = new GameField();
                 bodyFields.RemoveAt(bodyFields.Count - 1);
             }
 
@@ -152,24 +152,36 @@ namespace SnakeProjekt
             {
                 for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
-                    if (gameFields[row, column].state == FieldState.basic_food) { gameFields[row, column] = new BasicFoodField(); }
-                    if (gameFields[row, column].state == FieldState.wall) { gameFields[row, column] = new WallField(); }
-                    if (gameFields[row, column].state == FieldState.empty) { gameFields[row, column] = new temp_GameField(); }
-                    if (gameFields[row, column].state == FieldState.special_food)
+                    //change to swithc case
+                    FieldState state = gameFields[row, column].state;
+
+                    switch (state)
                     {
-                        if (specialFoodTimer > 0)
-                        {
-                            gameFields[row, column] = new SpecialFoodField();
-                            specialFoodTimer--;
-                        }
-                        else
-                        {
-                            gameFields[row, column] = new temp_GameField();
-                            isSpecialFood = false;
-                            specialFoodTimer = null;
-                        }
-                        label_specialFoodTimer.Content = specialFoodTimer.ToString();
+                        case FieldState.empty:
+                            gameFields[row, column] = new GameField();
+                            break;
+                        case FieldState.wall:
+                            gameFields[row, column] = new GameField(FieldState.wall);
+                            break;
+                        case FieldState.basic_food:
+                            gameFields[row, column] = new GameField(FieldState.basic_food);
+                            break;
+                        case FieldState.special_food:
+                            if (specialFoodTimer > 0)
+                            {
+                                gameFields[row, column] = new GameField(FieldState.special_food);
+                                specialFoodTimer--;
+                            }
+                            else
+                            {
+                                gameFields[row, column] = new GameField();
+                                isSpecialFood = false;
+                                specialFoodTimer = null;
+                            }
+                            label_specialFoodTimer.Content = specialFoodTimer.ToString();
+                            break;
                     }
+
                 }
             }
 
@@ -266,13 +278,13 @@ namespace SnakeProjekt
 
                     for (int i=0; i<board_x; i++)
                     {
-                        gameFields[i, 0] = new WallField();
-                        gameFields[i, board_y-1] = new WallField();
+                        gameFields[i, 0] = new GameField(FieldState.wall);
+                        gameFields[i, board_y-1] = new GameField(FieldState.wall);
                     }
                     for (int i=1; i<board_y-1; i++)
                     {
-                        gameFields[0, i] = new WallField();
-                        gameFields[board_x-1, i] = new WallField();
+                        gameFields[0, i] = new GameField(FieldState.wall);
+                        gameFields[board_x-1, i] = new GameField(FieldState.wall);
                     }
                     break;
                 case GameMap.Tunnel:
