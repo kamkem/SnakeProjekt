@@ -27,7 +27,7 @@ namespace SnakeProjekt
         Empty,
         Borders,
         Tunnel,
-        Star
+        Boxes
     };
 
     class GameProperties

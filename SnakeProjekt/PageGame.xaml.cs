@@ -224,7 +224,6 @@ namespace SnakeProjekt
 
         private void gameOver()
         {
-            label_specialFoodTimer.Content = "lskjfsd";
             GameCanvas.Children.Clear();
             GameCanvas.UpdateLayout();
 
@@ -237,7 +236,7 @@ namespace SnakeProjekt
             bool isNewHighScore = false;
             if(totalScore > highScoresList[^1]) { 
                 stackHighScore.Visibility = Visibility.Visible;
-                HighScores.addHighScore(GameProperties.gameMapSelected, totalScore);
+                HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, "Your Name!");
                 isNewHighScore = true;
             }
 
@@ -310,8 +309,52 @@ namespace SnakeProjekt
                     }
                     break;
                 case GameMap.Tunnel:
+                    //corners
+                    //horizontal
+                    for (int i=0; i<4; i++)
+                    {
+                        gameFields[i, 0] = new GameField(FieldState.wall);
+                        gameFields[board_x-1-i, 0] = new GameField(FieldState.wall);
+
+                        gameFields[i, board_y - 1] = new GameField(FieldState.wall);
+                        gameFields[board_x-1-i, board_y - 1] = new GameField(FieldState.wall);
+                    }
+                    //vertical
+                    for (int i=1; i<4; i++)
+                    {
+                        gameFields[0, i] = new GameField(FieldState.wall);
+                        gameFields[0, board_y-1-i] = new GameField(FieldState.wall);
+
+                        gameFields[board_x-1, i] = new GameField(FieldState.wall);
+                        gameFields[board_x-1, board_y - 1 -i] = new GameField(FieldState.wall);
+                    }
+
+                    //tunnel
+                    for (int i=7; i < 14; i++)
+                    {
+                        gameFields[i, 4] = new GameField(FieldState.wall);
+                        gameFields[i, 7] = new GameField(FieldState.wall);
+                    }
+
                     break;
-                case GameMap.Star:
+                case GameMap.Boxes:
+                    //vertical
+                    for (int i=0; i<board_y; i++)
+                    {
+                        gameFields[7, i] = new GameField(FieldState.wall);
+                    }
+                    //left horizontal
+                    for (int i = 0; i < 7; i++)
+                    {
+                        gameFields[i, 7] = new GameField(FieldState.wall);
+                    }
+
+                    //right horizontal
+                    for (int i = 8; i < board_x; i++)
+                    {
+                        gameFields[i, 5] = new GameField(FieldState.wall);
+                    }
+
                     break;
             }
         }

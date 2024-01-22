@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Reflection.PortableExecutable;
+using System.Data.SqlTypes;
 
 namespace SnakeProjekt
 {
@@ -50,8 +51,28 @@ namespace SnakeProjekt
             return output;
         }
 
-        public static void addHighScore(GameMap gameMap, int newHighScore) { 
-        }
+        public static void addHighScore(GameMap gameMap, int newHighScore, string name)
+        {
+
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string map = gameMap.ToString();
+                string query = "INSERT INTO HighScoreTable (Name, Score, Level, Map) VALUES ((@name), (@newHighScore), (@level), (@map))";
+
+                using (SqlCommand command4 = new SqlCommand(query, conn))
+                {
+                    command4.Parameters.AddWithValue("@name", name);
+                    command4.Parameters.AddWithValue("newHighScore", newHighScore);
+                    command4.Parameters.AddWithValue("@level", GameProperties.level);
+                    command4.Parameters.AddWithValue("@map", GameProperties.gameMapSelected.ToString());
+
+                    command4.ExecuteNonQuery();
+                }
+            }
+        }   
 
         public static DataTable generateHighScoreTable(GameMap gameMap, bool isNewHighScore)
         {
