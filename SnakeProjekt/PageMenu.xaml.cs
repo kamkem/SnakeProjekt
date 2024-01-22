@@ -36,5 +36,10 @@ namespace SnakeProjekt
         {
             this.NavigationService.Navigate(new Uri("SettingsPage.xaml", UriKind.Relative));
         }
+
+        private void buttonHighScores_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("HighScoresPage.xaml", UriKind.Relative));
+        }
     }
 }

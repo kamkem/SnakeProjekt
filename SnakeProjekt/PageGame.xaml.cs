@@ -78,6 +78,10 @@ namespace SnakeProjekt
 
             // DrawSnake();
 
+            //add high and low score
+            List<int> highScoresList = HighScores.getHighScores(GameProperties.gameMapSelected);
+            label_high_score.Content = highScoresList[0];
+
             setMap();
 
             RedrawGrid();
