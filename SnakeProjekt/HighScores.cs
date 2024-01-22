@@ -50,7 +50,7 @@ namespace SnakeProjekt
             return output;
         }
 
-        public void addHighScore(GameField gameField, int newHighScore) { 
+        public static void addHighScore(GameMap gameMap, int newHighScore) { 
         }
 
         public static DataTable generateHighScoreTable(GameMap gameMap, bool isNewHighScore)
