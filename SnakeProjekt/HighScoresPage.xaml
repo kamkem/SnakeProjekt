@@ -9,6 +9,55 @@
       Title="HighScoresPage">
 
     <Grid Background="Goldenrod">
-        <TextBox x:Name="tempTextHighScores" Background="Bisque" Width="200" Height="200"></TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
+            <ListView Name="listView0">
+                <ListView.View>
+                    <GridView>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Border>
+
+        <Border Grid.Column="1" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
+            <ListView Name="listView1">
+            <ListView.View>
+                <GridView>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        </Border>
+
+        <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
+            <ListView Name="listView2">
+                <ListView.View>
+                    <GridView>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+
+        <Border Grid.Column="3" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
+            <ListView Name="listView3">
+                <ListView.View>
+                    <GridView>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Border>
+
+
+
     </Grid>
 </Page>

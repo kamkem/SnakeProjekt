@@ -29,7 +29,7 @@ namespace SnakeProjekt
 
            // tempTextHighScores.Text = output;
 
-            tempTextHighScores.Text += "\n\n\n";
+            //tempTextHighScores.Text += "\n\n\n";
 
             //tempTextHighScores.Text += "Borders: " + highScores.getHighscore(GameMap.Borders).ToString() + "\n";
             //tempTextHighScores.Text += "Star: " + highScores.getHighscore(GameMap.Star).ToString() +"\n";
@@ -42,7 +42,7 @@ namespace SnakeProjekt
 
             foreach (int highScore in highScoreList)
             {
-                tempTextHighScores.Text += highScore.ToString();
+                //tempTextHighScores.Text += highScore.ToString();
             }
 
 
