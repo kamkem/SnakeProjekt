@@ -19,5 +19,19 @@
 <Label x:Name="High_score_title" Content="High score:" HorizontalAlignment="Left" Margin="238,13,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Comic Sans MS" FontWeight="Bold"/>
 <Label x:Name="label_high_score" Content="" HorizontalAlignment="Left" Margin="371,17,0,0" VerticalAlignment="Top" FontSize="20"/>
 <Label x:Name="label_specialFoodTimer" Content="" HorizontalAlignment="Left" Margin="661,3,0,0" VerticalAlignment="Top" Height="47" Width="69" FontSize="20"/>
+        <StackPanel x:Name="stackPanel_gameOver" HorizontalAlignment="Stretch" Height="684" VerticalAlignment="Stretch" Background="#BB000000" Visibility="Hidden">
+            <Label Name="stackLabel1" Foreground="AntiqueWhite" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 200, 0, 0">
+                Game Over
+            </Label>
+            <Label Name="stackLabel2" Foreground="PaleTurquoise" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center">
+                Score:
+            </Label>
+            <Label Name="stackLabelScore" FontSize="30" Foreground="Bisque" HorizontalAlignment="Center">
+
+            </Label>
+            <Label Name="stackHighScore" FontSize="40" Foreground="PaleVioletRed" HorizontalAlignment="Center" Visibility="Hidden">
+                New High score!!!
+            </Label>
+        </StackPanel>
     </Grid>
 </Page>

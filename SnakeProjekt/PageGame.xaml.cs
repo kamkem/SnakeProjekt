@@ -227,6 +227,13 @@ namespace SnakeProjekt
             GameCanvas.UpdateLayout();
 
             dispatcherTimer.Stop();
+
+            stackPanel_gameOver.Visibility = Visibility.Visible;
+
+            //tymczasowe:
+            bool isHighScore = true;
+
+            if (isHighScore) { stackHighScore.Visibility = Visibility.Visible; }
         }
 
         public void RedrawGrid()
