@@ -237,6 +237,7 @@ namespace SnakeProjekt
             bool isNewHighScore = false;
             if(totalScore > highScoresList[^1]) { 
                 stackHighScore.Visibility = Visibility.Visible;
+                HighScores.addHighScore(GameProperties.gameMapSelected, totalScore);
                 isNewHighScore = true;
             }
 
