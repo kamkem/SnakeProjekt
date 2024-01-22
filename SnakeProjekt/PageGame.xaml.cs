@@ -39,6 +39,8 @@ namespace SnakeProjekt
 
         Random rnd = new Random();
 
+        List<int> highScoresList;
+
         public PageGame()
         {
             InitializeComponent();
@@ -79,7 +81,7 @@ namespace SnakeProjekt
             // DrawSnake();
 
             //add high and low score
-            List<int> highScoresList = HighScores.getHighScores(GameProperties.gameMapSelected);
+            highScoresList = HighScores.getHighScores(GameProperties.gameMapSelected);
             label_high_score.Content = highScoresList[0];
 
             setMap();
@@ -229,12 +231,20 @@ namespace SnakeProjekt
             dispatcherTimer.Stop();
 
             stackPanel_gameOver.Visibility = Visibility.Visible;
+            stackLabelScore.Visibility = Visibility.Visible;
+            stackLabelScore.Content = totalScore.ToString();
 
-            //tymczasowe:
-            bool isHighScore = true;
+            bool isNewHighScore = false;
+            if(totalScore > highScoresList[^1]) { 
+                stackHighScore.Visibility = Visibility.Visible;
+                isNewHighScore = true;
+            }
 
-            if (isHighScore) { stackHighScore.Visibility = Visibility.Visible; }
+            //generate highscore table
+            dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected, isNewHighScore).DefaultView;
         }
+
+
 
         public void RedrawGrid()
         {

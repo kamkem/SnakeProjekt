@@ -50,6 +50,34 @@ namespace SnakeProjekt
             return output;
         }
 
+        public void addHighScore(GameField gameField, int newHighScore) { 
+        }
+
+        public static DataTable generateHighScoreTable(GameMap gameMap, bool isNewHighScore)
+        {
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+
+                string map = gameMap.ToString();
+                string query = "Select TOP 5 Name, Score FROM HighScoreTable WHERE Map = @map ORDER BY Score DESC";
+
+                using (SqlCommand command3 = new SqlCommand(query, conn))
+                {
+                    command3.Parameters.AddWithValue("@map", map);
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command3))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+
+                return dataTable;
+            }
+        }
+
 
         public static List<int> getHighScores(GameMap gameMap) //on level and map?
         {
