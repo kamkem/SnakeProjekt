@@ -39,6 +39,7 @@ namespace SnakeProjekt
 
         Random rnd = new Random();
         bool movementLock;
+        BodyOrientation headOrientation = BodyOrientation.right;
 
         List<int> highScoresList;
 
@@ -65,18 +66,14 @@ namespace SnakeProjekt
                 }
             }
 
-            //TO CHECK!
-            //initial snake body
-            int[] body = new int[] { 2, 5 };
-            bodyFields.Add(body);
-            body = new int[] { 2, 4 };
-            bodyFields.Add(body);
-            body = new int[] { 2, 3 };
-            bodyFields.Add(body);
-            body = new int[] { 2, 2 };
-            bodyFields.Add(body);
-            body = new int[] { 2, 1 };
-            bodyFields.Add(body);
+
+            for (int i=5; i>0; i--)
+            {
+                int[] body = new int []{ i, 7 };
+                bodyFields.Add(body);
+            }
+
+            setBodyFieldsOrientation();
 
             //add high and low score
             highScoresList = HighScores.getHighScores(GameProperties.gameMapSelected);
@@ -101,7 +98,6 @@ namespace SnakeProjekt
             RedrawGrid();
             movementLock = false;
         }
-
 
         private void MoveSnake()
         {
@@ -139,16 +135,81 @@ namespace SnakeProjekt
                 int[] lastElement = bodyFields[bodyFields.Count - 1];
                 gameFields[lastElement[0], lastElement[1]] = new GameField();
                 bodyFields.RemoveAt(bodyFields.Count - 1);
+                //change last bodyfield to tail
+                lastElement = bodyFields[bodyFields.Count - 1];
+                gameFields[lastElement[0], lastElement[1]] = new BodyField(BodyType.tail, BodyOrientation.up); //to adjust
             }
 
 
             //old head becomes "normal" body
-            gameFields[head[0], head[1]] = new BodyField(false, "placeholder");
+            gameFields[head[0], head[1]] = new BodyField(BodyType.body, BodyOrientation.none);
 
             //add new head
             bodyFields.Insert(0, new_head);
-            gameFields[new_head[0], new_head[1]] = new BodyField(true, "placeholder");
+            gameFields[new_head[0], new_head[1]] = new BodyField(BodyType.head, headOrientation);
 
+            //adjust body directions
+            setBodyFieldsOrientation();
+
+        }
+
+        private void setBodyFieldsOrientation()
+        {
+            BodyOrientation bodyOrientation = BodyOrientation.none;
+            for (int i = 1; i< bodyFields.Count-1; i++)  //skip head and tail
+            {                
+                int[] previousField = bodyFields[i-1];
+                int[] nextField = bodyFields[i + 1];
+                int[] currentField = bodyFields[i];
+
+                if (previousField[0] == nextField[0]) { bodyOrientation = BodyOrientation.vertical; }
+                else if (previousField[1] == nextField[1]) { bodyOrientation = BodyOrientation.horizontal ; }
+
+                //turns
+                else
+                {                   
+                    if (previousField[0] < nextField[0] && previousField[1] < nextField[1] && currentField[1] == previousField[1]||
+                        previousField[0] > nextField[0] && previousField[1] > nextField[1] && currentField[0] == previousField[0])
+                    {
+                        bodyOrientation = BodyOrientation.bottomleft;
+                    }
+                    else if(previousField[0] < nextField[0] && previousField[1] > nextField[1] && currentField[0]==previousField[0] 
+                        || previousField[0] > nextField[0] && previousField[1] < nextField[1] && currentField[1] == previousField[1]) //???
+                    {
+                        bodyOrientation = BodyOrientation.bottomright;
+                    }
+                    else if (previousField[0] < nextField[0] && previousField[1] > nextField[1] && currentField[1] == previousField[1]
+                        || previousField[0] > nextField[0] && previousField[1] < nextField[1] && currentField[0] == previousField[0])
+                    {
+                        bodyOrientation = BodyOrientation.topleft;
+                    }
+                    else if (previousField[0] > nextField[0] && previousField[1] > nextField[1] && currentField[1] == previousField[1]||
+                        previousField[0] < nextField[0] && previousField[1] < nextField[1] && currentField[0] == previousField[0])
+                    {
+                        bodyOrientation = BodyOrientation.topright;
+                    }
+                    
+                }
+
+                gameFields[currentField[0], currentField[1]] = new BodyField(BodyType.body, bodyOrientation);
+            }
+
+            //set tail
+            int [] tailField = bodyFields[^1];
+            int [] beforeTailField = bodyFields[^2];
+            if (tailField[0] == beforeTailField[0])
+            {
+                if (tailField[1] > beforeTailField[1]) { bodyOrientation = BodyOrientation.down; }
+                else { bodyOrientation = BodyOrientation.up; }
+            }
+            else if (tailField[1] == beforeTailField[1])
+            {
+                if (tailField[0] > beforeTailField[0]) { bodyOrientation = BodyOrientation.right; }
+                else { bodyOrientation = BodyOrientation.left; }
+            }
+
+            gameFields[tailField[0], tailField[1]] = new BodyField(BodyType.tail, bodyOrientation);
+                
         }
 
         private void checkFieldsState()
@@ -157,7 +218,7 @@ namespace SnakeProjekt
             {
                 for (int row = 0; row < gameFields.GetLength(0); row++)
                 {
-                    //change to swithc case
+                    
                     FieldState state = gameFields[row, column].state;
 
                     switch (state)
@@ -309,15 +370,17 @@ namespace SnakeProjekt
         {
             if (!movementLock)
             {
+                BodyOrientation newHeadOrientation = BodyOrientation.none;
                 int[] newMovement = new int[2];
-                if (e.Key == Key.Down) { newMovement[0] = 0; newMovement[1] = 1; }
-                else if (e.Key == Key.Up) { newMovement[0] = 0; newMovement[1] = -1; }
-                else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; }
-                else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; }
+                if (e.Key == Key.Down) { newMovement[0] = 0; newMovement[1] = 1; newHeadOrientation = BodyOrientation.down; }
+                else if (e.Key == Key.Up) { newMovement[0] = 0; newMovement[1] = -1; newHeadOrientation = BodyOrientation.up; }
+                else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; newHeadOrientation = BodyOrientation.left; }
+                else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; newHeadOrientation = BodyOrientation.right; }
 
                 if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1)
                 {
                     movementDirection = newMovement;
+                    headOrientation = newHeadOrientation;
                 }
                 movementLock = true;
             }
@@ -326,6 +389,7 @@ namespace SnakeProjekt
             {
                 this.NavigationService.Navigate(new Uri("PageMenu.xaml", UriKind.Relative));
             }
+
         }
 
         private void setMap()

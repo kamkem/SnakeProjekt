@@ -72,21 +72,33 @@ namespace SnakeProjekt
 
     }
 
+    enum BodyOrientation
+    {
+        none,
+        up,
+        down,
+        left,
+        right,
+        bottomleft,
+        bottomright,
+        topleft,
+        topright,
+        vertical,
+        horizontal,
+    }
+
+    enum BodyType
+    {
+        head,
+        body,
+        tail
+    }
     class BodyField : GameField
     {
-        string direction;
-
-        public BodyField(bool head, string direction) : base(FieldState.body)
+        public BodyField(BodyType bodyType, BodyOrientation bodyOrientation) : base(FieldState.body)
         {
 
-            if (head)
-            {
-                image = "head_ph.png";
-            }
-            else
-            {
-                image = "body_ph.png";
-            }
+            image = bodyType.ToString() + "_" + bodyOrientation.ToString() + ".png";
 
         }
     }
