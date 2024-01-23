@@ -17,14 +17,13 @@
     <None Remove="Resources\body_topleft.png" />
     <None Remove="Resources\body_topright.png" />
     <None Remove="Resources\body_vertical.png" />
-    <None Remove="Resources\cake.png" />
     <None Remove="Resources\crate1_diffuse.png" />
     <None Remove="Resources\head_down.png" />
     <None Remove="Resources\head_left.png" />
     <None Remove="Resources\head_ph.png" />
     <None Remove="Resources\head_right.png" />
     <None Remove="Resources\head_up.png" />
-    <None Remove="Resources\jello.png" />
+    <None Remove="Resources\plum.png" />
     <None Remove="Resources\red-apple.png" />
     <None Remove="Resources\sizeGrassSnake.png" />
     <None Remove="Resources\tail_down.png" />
@@ -56,12 +55,11 @@
 
   <ItemGroup>
     <Resource Include="Resources\body_ph.png" />
-    <Resource Include="Resources\cake.png" />
     <Resource Include="Resources\head_down.png" />
     <Resource Include="Resources\head_left.png" />
     <Resource Include="Resources\head_ph.png" />
     <Resource Include="Resources\head_right.png" />
-    <Resource Include="Resources\jello.png" />
+    <Resource Include="Resources\plum.png" />
     <Resource Include="Resources\red-apple.png" />
     <Resource Include="Resources\sizeGrassSnake.png" />
     <Resource Include="Resources\tail_down.png" />

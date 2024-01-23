@@ -133,16 +133,6 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
-        internal static byte[] cake {
-            get {
-                object obj = ResourceManager.GetObject("cake", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
-        /// </summary>
         internal static byte[] crate1_diffuse {
             get {
                 object obj = ResourceManager.GetObject("crate1_diffuse", resourceCulture);
@@ -203,9 +193,9 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
-        internal static byte[] jello {
+        internal static byte[] plum {
             get {
-                object obj = ResourceManager.GetObject("jello", resourceCulture);
+                object obj = ResourceManager.GetObject("plum", resourceCulture);
                 return ((byte[])(obj));
             }
         }

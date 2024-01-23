@@ -185,7 +185,7 @@ namespace SnakeProjekt
                         bodyOrientation = BodyOrientation.bottomleft;
                     }
                     else if(previousField[0] < nextField[0] && previousField[1] > nextField[1] && currentField[0]==previousField[0] 
-                        || previousField[0] > nextField[0] && previousField[1] < nextField[1] && currentField[1] == previousField[1]) //???
+                        || previousField[0] > nextField[0] && previousField[1] < nextField[1] && currentField[1] == previousField[1])
                     {
                         bodyOrientation = BodyOrientation.bottomright;
                     }

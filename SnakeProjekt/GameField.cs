@@ -54,7 +54,7 @@ namespace SnakeProjekt
                     break;
                 case FieldState.special_food:
                     collision_type = CollisionType.food;
-                    image = "cake.png";
+                    image = "plum.png";
                     break;
                 case FieldState.body:
                     collision_type = CollisionType.collision;
