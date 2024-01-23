@@ -66,10 +66,21 @@ namespace SnakeProjekt
                 }
             }
 
-
-            for (int i=5; i>0; i--)
+            int ibody, jbody;
+            if(GameProperties.gameMapSelected ==GameMap.Boxes)
             {
-                int[] body = new int []{ i, 7 };
+                ibody = 15;
+                jbody = 3;
+
+            }
+            else
+            {
+                ibody = 5;
+                jbody = 5;
+            }
+            for (int i = ibody; i>ibody-5; i--)
+            {
+                int[] body = new int []{ i, jbody };
                 bodyFields.Add(body);
             }
 
