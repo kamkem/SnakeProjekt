@@ -94,7 +94,7 @@ namespace SnakeProjekt
 
                     BorderThickness = new Thickness(0),
                     BorderBrush = new SolidColorBrush(Colors.Transparent),
-                    ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable((GameMap)mapsEnum.GetValue(i), true).DefaultView,
+                    ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable((GameMap)mapsEnum.GetValue(i)).DefaultView,
             };
 
                 stackPanel.Children.Add(dataGrid);

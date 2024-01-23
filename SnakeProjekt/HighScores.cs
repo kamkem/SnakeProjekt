@@ -74,7 +74,7 @@ namespace SnakeProjekt
             }
         }   
 
-        public static DataTable generateHighScoreTable(GameMap gameMap, bool isNewHighScore)
+        public static DataTable generateHighScoreTable(GameMap gameMap)
         {
             DataTable dataTable = new DataTable();
 

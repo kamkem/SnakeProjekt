@@ -232,12 +232,13 @@ namespace SnakeProjekt
             stackLabelScore.Visibility = Visibility.Visible;
             stackLabelScore.Content = totalScore.ToString();
 
-            bool isNewHighScore = false;
+
+             bool nameSet = true;
             if (totalScore > highScoresList[^1])
             {
+                nameSet = false;
                 stackHighScore.Visibility = Visibility.Visible;
                 //HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, "Add your name!");
-                isNewHighScore = true;
 
                 textBoxName.Visibility = Visibility.Visible;
                 textBoxName.Focus();
@@ -251,20 +252,27 @@ namespace SnakeProjekt
                         string newName = textBoxName.Text;
                         HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, newName);
                         textBoxName.Visibility = Visibility.Collapsed;
-                        dataGridHighScores.Visibility = Visibility.Visible;
-                        dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected, isNewHighScore).DefaultView;
+
+                        textBoxName.IsEnabled = false; 
+                        nameSet = true;
+                        showTable(nameSet);
                     }
                 };
 
             }
             else
             {
-                //generate highscore table
-                dataGridHighScores.Visibility = Visibility.Visible;
-                dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected, isNewHighScore).DefaultView;
-
+                showTable(nameSet);    
             }
         }
+
+        private void showTable(bool nameSet)
+        {
+            dataGridHighScores.Visibility = Visibility.Visible;
+            dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected).DefaultView;
+            this.Focus();
+        }
+
 
 
 
@@ -312,6 +320,11 @@ namespace SnakeProjekt
                     movementDirection = newMovement;
                 }
                 movementLock = true;
+            }
+
+            if (e.Key == Key.Back && sender == this)
+            {
+                this.NavigationService.Navigate(new Uri("PageMenu.xaml", UriKind.Relative));
             }
         }
 
