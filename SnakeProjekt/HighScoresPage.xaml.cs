@@ -25,26 +25,10 @@ namespace SnakeProjekt
         {
             InitializeComponent();
 
-            //HighScores highScores = new HighScores();
-            //string output = highScores.readDatabase();
-
-           // tempTextHighScores.Text = output;
-
-            //tempTextHighScores.Text += "\n\n\n";
-
-            //tempTextHighScores.Text += "Borders: " + highScores.getHighscore(GameMap.Borders).ToString() + "\n";
-            //tempTextHighScores.Text += "Star: " + highScores.getHighscore(GameMap.Star).ToString() +"\n";
-            //tempTextHighScores.Text += "Empty: " + highScores.getHighscore(GameMap.Empty).ToString() + "\n";
-
             List <int> highScoreList = new List <int>();
 
             highScoreList = HighScores.getHighScores(GameMap.Borders);
             CreateColumns();
-
-            foreach (int highScore in highScoreList)
-            {
-                //tempTextHighScores.Text += highScore.ToString();
-            }
 
 
         }
@@ -81,9 +65,7 @@ namespace SnakeProjekt
                     FontWeight = FontWeights.Bold,
                     Margin = new Thickness(10),
                 };
-                //Grid.SetRow(title, 0);
-                //Grid.SetColumn(title, i);
-                //grid.Children.Add(title);
+
                 stackPanel.Children.Add(title);
 
                 DataGrid dataGrid = new DataGrid
@@ -102,8 +84,6 @@ namespace SnakeProjekt
                 Grid.SetRow(stackPanel, 0);
                 Grid.SetColumn(stackPanel, i);
                 grid.Children.Add(stackPanel);
-
-                //*/
 
                 if (i == numberOfColumns-1)
                 {
@@ -128,56 +108,3 @@ namespace SnakeProjekt
     
 }
 
-
-/*
-         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-
-        <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
-            <ListView Name="listView0">
-                <ListView.View>
-                    <GridView>
-
-                    </GridView>
-                </ListView.View>
-            </ListView>
-
-        </Border>
-
-        <Border Grid.Column="1" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
-            <ListView Name="listView1">
-            <ListView.View>
-                <GridView>
-
-                </GridView>
-            </ListView.View>
-        </ListView>
-        </Border>
-
-        <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
-            <ListView Name="listView2">
-                <ListView.View>
-                    <GridView>
-
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Border>
-
-        <Border Grid.Column="3" BorderBrush="Transparent" BorderThickness="0"  Margin="5, 150" Background="Transparent">
-            <ListView Name="listView3">
-                <ListView.View>
-                    <GridView>
-
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Border>
-
-
- 
- */
