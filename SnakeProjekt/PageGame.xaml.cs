@@ -254,6 +254,7 @@ namespace SnakeProjekt
                                 gameFields[row, column] = new GameField();
                                 isSpecialFood = false;
                                 specialFoodTimer = null;
+                                SpecialFood_title.Visibility = Visibility.Hidden;
                             }
                             label_specialFoodTimer.Content = specialFoodTimer.ToString();
                             break;
@@ -275,6 +276,7 @@ namespace SnakeProjekt
                     addFood(FieldState.special_food);
                     isSpecialFood = true;
                     specialFoodTimer = 20;
+                    SpecialFood_title.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -310,7 +312,6 @@ namespace SnakeProjekt
             {
                 nameSet = false;
                 stackHighScore.Visibility = Visibility.Visible;
-                //HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, "Add your name!");
 
                 textBoxName.Visibility = Visibility.Visible;
                 textBoxName.Focus();

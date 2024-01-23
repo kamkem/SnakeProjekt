@@ -5,20 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SnakeProjekt"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1054"
+      d:DesignHeight="800" d:DesignWidth="1054"
       Title="PageGame" KeyDown="Page_KeyDown">
 
-    <Grid x:Name="pageGame" Background="White">
+    <Grid x:Name="pageGame" Background="DarkSeaGreen">
         <Canvas x:Name="GameCanvas" HorizontalAlignment="Center" Height="604" VerticalAlignment="Top" Width="1000" Margin="0,50,0,0" Focusable="True">
-    <Canvas.Background>
-        <ImageBrush ImageSource="/Resources/sizeGrassSnake.png"/>
-    </Canvas.Background>
-</Canvas>
-<Label x:Name="Score_title" Content="Score:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="40" Width="81" FontSize="22" FontWeight="Bold" FontFamily="Comic Sans MS"/>
-<Label x:Name="label_score" Content="0" HorizontalAlignment="Left" Margin="96,13,0,0" VerticalAlignment="Top" FontSize="20"/>
-<Label x:Name="High_score_title" Content="High score:" HorizontalAlignment="Left" Margin="238,13,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Comic Sans MS" FontWeight="Bold"/>
-<Label x:Name="label_high_score" Content="" HorizontalAlignment="Left" Margin="371,17,0,0" VerticalAlignment="Top" FontSize="20"/>
-<Label x:Name="label_specialFoodTimer" Content="" HorizontalAlignment="Left" Margin="661,3,0,0" VerticalAlignment="Top" Height="47" Width="69" FontSize="20"/>
+            <Canvas.Background>
+                <ImageBrush ImageSource="/Resources/sizeGrassSnake.png" Opacity="0.8"/>
+            </Canvas.Background>
+        </Canvas>
+        <Label x:Name="Score_title" Content="Score:" HorizontalAlignment="Left" Margin="172,659,0,0" VerticalAlignment="Top" Height="40" Width="81" FontSize="22" FontWeight="Bold" FontFamily="Comic Sans MS"/>
+        <Label x:Name="label_score" Content="0" HorizontalAlignment="Left" Margin="200,695,0,0" VerticalAlignment="Top" FontSize="28"/>
+        <Label x:Name="SpecialFood_title" Content="Special food timer:" HorizontalAlignment="Center" Visibility="Hidden" Margin="0,659,0,0" VerticalAlignment="Top" Height="40" Width="234" FontSize="22" FontWeight="Bold" FontFamily="Comic Sans MS"/>
+        <Label x:Name="High_score_title" Content="High score:" HorizontalAlignment="Left" Margin="796,661,0,0" VerticalAlignment="Top" FontSize="22" FontFamily="Comic Sans MS" FontWeight="Bold"/>
+        <Label x:Name="label_high_score" Content="000" HorizontalAlignment="Left" Margin="835,695,0,0" VerticalAlignment="Top" FontSize="28"/>
+        <Label x:Name="label_specialFoodTimer" Content="" HorizontalAlignment="Center" Foreground="MediumVioletRed" Margin="0,695,0,0" VerticalAlignment="Top" Height="47" Width="70" FontSize="28" FontWeight="Bold"/>
         <StackPanel x:Name="stackPanel_gameOver" HorizontalAlignment="Stretch" Height="684" VerticalAlignment="Stretch" Background="#BB000000" Visibility="Hidden">
             <Label Name="stackLabel1" Foreground="AntiqueWhite" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 150, 0, 0">
                 Game Over

@@ -153,6 +153,16 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
+        internal static byte[] grass03 {
+            get {
+                object obj = ResourceManager.GetObject("grass03", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
         internal static byte[] head_down {
             get {
                 object obj = ResourceManager.GetObject("head_down", resourceCulture);
