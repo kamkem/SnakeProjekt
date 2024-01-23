@@ -63,9 +63,69 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
+        internal static byte[] body_bottomleft {
+            get {
+                object obj = ResourceManager.GetObject("body_bottomleft", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] body_bottomright {
+            get {
+                object obj = ResourceManager.GetObject("body_bottomright", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] body_horizontal {
+            get {
+                object obj = ResourceManager.GetObject("body_horizontal", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
         internal static byte[] body_ph {
             get {
                 object obj = ResourceManager.GetObject("body_ph", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] body_topleft {
+            get {
+                object obj = ResourceManager.GetObject("body_topleft", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] body_topright {
+            get {
+                object obj = ResourceManager.GetObject("body_topright", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] body_vertical {
+            get {
+                object obj = ResourceManager.GetObject("body_vertical", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -93,9 +153,49 @@ namespace SnakeProjekt.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
         /// </summary>
+        internal static byte[] head_down {
+            get {
+                object obj = ResourceManager.GetObject("head_down", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] head_left {
+            get {
+                object obj = ResourceManager.GetObject("head_left", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
         internal static byte[] head_ph {
             get {
                 object obj = ResourceManager.GetObject("head_ph", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] head_right {
+            get {
+                object obj = ResourceManager.GetObject("head_right", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] head_up {
+            get {
+                object obj = ResourceManager.GetObject("head_up", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -126,6 +226,46 @@ namespace SnakeProjekt.Properties {
         internal static byte[] sizeGrassSnake {
             get {
                 object obj = ResourceManager.GetObject("sizeGrassSnake", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] tail_down {
+            get {
+                object obj = ResourceManager.GetObject("tail_down", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] tail_left {
+            get {
+                object obj = ResourceManager.GetObject("tail_left", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] tail_right {
+            get {
+                object obj = ResourceManager.GetObject("tail_right", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Byte[].
+        /// </summary>
+        internal static byte[] tail_up {
+            get {
+                object obj = ResourceManager.GetObject("tail_up", resourceCulture);
                 return ((byte[])(obj));
             }
         }
