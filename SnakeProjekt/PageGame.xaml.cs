@@ -148,7 +148,7 @@ namespace SnakeProjekt
                 bodyFields.RemoveAt(bodyFields.Count - 1);
                 //change last bodyfield to tail
                 lastElement = bodyFields[bodyFields.Count - 1];
-                gameFields[lastElement[0], lastElement[1]] = new BodyField(BodyType.tail, BodyOrientation.up); //to adjust
+                gameFields[lastElement[0], lastElement[1]] = new BodyField(BodyType.tail, BodyOrientation.up);
             }
 
 
