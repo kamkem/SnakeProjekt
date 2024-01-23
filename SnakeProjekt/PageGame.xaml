@@ -29,11 +29,11 @@
             <Label Name="stackLabelScore" FontSize="30" Foreground="Bisque" HorizontalAlignment="Center">
 
             </Label>
-            <Label Name="stackHighScore" FontSize="40" Foreground="PaleVioletRed" HorizontalAlignment="Center">
+            <Label Name="stackHighScore" FontSize="40" Foreground="PaleVioletRed" HorizontalAlignment="Center" Visibility="Collapsed">
                 New High score!!!
             </Label>
-            
-            <DataGrid Name="dataGridHighScores" AutoGenerateColumns="True" Background="Transparent" AlternatingRowBackground="Transparent" AlternationCount="6" BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" HeadersVisibility="Column" MinColumnWidth="50" FontSize="20">
+            <TextBox Name="textBoxName" FontSize="30" Background="Transparent" HorizontalAlignment="Center" Foreground="White" BorderThickness="2" Text="Your name + Enter" Visibility="Collapsed"/>
+            <DataGrid Name="dataGridHighScores" AutoGenerateColumns="True" HorizontalContentAlignment="Right" Background="Transparent" AlternatingRowBackground="Transparent" AlternationCount="1" BorderBrush="Transparent" BorderThickness="0" HorizontalAlignment="Center" HeadersVisibility="Column" MinColumnWidth="80" FontSize="20" GridLinesVisibility="None" RowBackground="#00000000" IsEnabled="False" Visibility="Hidden">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="Background" Value="Transparent"/>
@@ -48,6 +48,7 @@
                         <Setter Property="Foreground" Value="NavajoWhite"/>
                         <Setter Property="BorderBrush" Value="Transparent"/>
                         <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
                     </Style>
                 </DataGrid.CellStyle>
             </DataGrid>

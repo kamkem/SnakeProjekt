@@ -38,6 +38,7 @@ namespace SnakeProjekt
         bool isSpecialFood = false;
 
         Random rnd = new Random();
+        bool movementLock;
 
         List<int> highScoresList;
 
@@ -77,9 +78,6 @@ namespace SnakeProjekt
             body = new int[] { 2, 1 };
             bodyFields.Add(body);
 
-
-            // DrawSnake();
-
             //add high and low score
             highScoresList = HighScores.getHighScores(GameProperties.gameMapSelected);
             label_high_score.Content = highScoresList[0];
@@ -101,6 +99,7 @@ namespace SnakeProjekt
             MoveSnake();
             checkFieldsState();
             RedrawGrid();
+            movementLock = false;
         }
 
 
@@ -234,14 +233,37 @@ namespace SnakeProjekt
             stackLabelScore.Content = totalScore.ToString();
 
             bool isNewHighScore = false;
-            if(totalScore > highScoresList[^1]) { 
+            if (totalScore > highScoresList[^1])
+            {
                 stackHighScore.Visibility = Visibility.Visible;
-                HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, "Your Name!");
+                //HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, "Add your name!");
                 isNewHighScore = true;
-            }
 
-            //generate highscore table
-            dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected, isNewHighScore).DefaultView;
+                textBoxName.Visibility = Visibility.Visible;
+                textBoxName.Focus();
+
+                textBoxName.KeyDown += (sender, e) =>
+                {
+                    
+                    if (e.Key == Key.Enter)
+                    {
+                        
+                        string newName = textBoxName.Text;
+                        HighScores.addHighScore(GameProperties.gameMapSelected, totalScore, newName);
+                        textBoxName.Visibility = Visibility.Collapsed;
+                        dataGridHighScores.Visibility = Visibility.Visible;
+                        dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected, isNewHighScore).DefaultView;
+                    }
+                };
+
+            }
+            else
+            {
+                //generate highscore table
+                dataGridHighScores.Visibility = Visibility.Visible;
+                dataGridHighScores.ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable(GameProperties.gameMapSelected, isNewHighScore).DefaultView;
+
+            }
         }
 
 
@@ -277,15 +299,19 @@ namespace SnakeProjekt
 
         private void Page_KeyDown(object sender, KeyEventArgs e)
         {
-            int[] newMovement = new int[2];
-            if (e.Key == Key.Down) { newMovement[0] = 0; newMovement[1] = 1; }
-            else if (e.Key == Key.Up) { newMovement[0] = 0; newMovement[1] = -1; }
-            else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; }
-            else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; }
-
-            if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1)
+            if (!movementLock)
             {
-                movementDirection = newMovement;
+                int[] newMovement = new int[2];
+                if (e.Key == Key.Down) { newMovement[0] = 0; newMovement[1] = 1; }
+                else if (e.Key == Key.Up) { newMovement[0] = 0; newMovement[1] = -1; }
+                else if (e.Key == Key.Left) { newMovement[0] = -1; newMovement[1] = 0; }
+                else if (e.Key == Key.Right) { newMovement[0] = 1; newMovement[1] = 0; }
+
+                if (newMovement[0] * movementDirection[0] + newMovement[1] * movementDirection[1] != -1)
+                {
+                    movementDirection = newMovement;
+                }
+                movementLock = true;
             }
         }
 
