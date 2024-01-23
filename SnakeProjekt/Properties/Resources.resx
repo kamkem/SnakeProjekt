@@ -145,9 +145,6 @@
   <data name="crate1_diffuse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\crate1_diffuse.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grass03" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\grass03.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="head_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\head_down.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
