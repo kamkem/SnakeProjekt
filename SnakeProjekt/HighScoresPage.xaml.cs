@@ -33,6 +33,60 @@ namespace SnakeProjekt
 
         }
 
+        private void CreateColumns2()
+        {
+            Array mapsEnum = Enum.GetValues(typeof(GameMap));
+            int numberOfColumns = mapsEnum.Length;
+
+            double columnWidth = 700/numberOfColumns;
+
+            DockPanel stackPanelMain = new DockPanel
+            {
+                //Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
+            };
+            Content = stackPanelMain;
+
+            for (int i = 0; i < numberOfColumns; i++) 
+            {
+                StackPanel stackPanel = new StackPanel
+                {
+                    Width = columnWidth,
+                    //HorizontalAlignment = HorizontalAlignment.S,
+                    //VerticalAlignment = VerticalAlignment.Center,
+
+                };
+
+
+                // Create a title
+                TextBlock title = new TextBlock
+                {
+                    Text = mapsEnum.GetValue(i).ToString(),
+                    FontSize = 16,
+                    FontWeight = FontWeights.Bold,
+                    Margin = new Thickness(10),
+                };
+
+                stackPanel.Children.Add(title);
+
+                DataGrid dataGrid = new DataGrid
+                {
+                    Margin = new Thickness(10, 10, 10, 10),//(10, 40, 10, 10)
+                    Width = columnWidth,
+                    Height = Height - 60,
+
+                    BorderThickness = new Thickness(0),
+                    BorderBrush = new SolidColorBrush(Colors.Transparent),
+                    ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable((GameMap)mapsEnum.GetValue(i)).DefaultView,
+                };
+
+                stackPanel.Children.Add(dataGrid);
+
+                stackPanelMain.Children.Add(stackPanel);
+            }
+        }
+
         private void CreateColumns()
         {
 
@@ -41,6 +95,16 @@ namespace SnakeProjekt
             // Create a Grid
             Grid grid = new Grid();
             Content = grid;
+
+            RowDefinition row1 = new RowDefinition();
+            RowDefinition row2 = new RowDefinition();
+            row1.Height = new GridLength(1, GridUnitType.Auto);
+            row2.Height = new GridLength(1, GridUnitType.Star);
+
+            grid.RowDefinitions.Add(row1);
+            grid.RowDefinitions.Add(row2);
+
+
 
             // Define column width
             double columnWidth = this.Width / numberOfColumns;
@@ -73,33 +137,36 @@ namespace SnakeProjekt
                     Margin = new Thickness(10, 10, 10, 10),//(10, 40, 10, 10)
                     Width = columnWidth - 20,
                     Height = Height - 60,
+                    //ColumnWidth = columnWidth,
 
                     BorderThickness = new Thickness(0),
                     BorderBrush = new SolidColorBrush(Colors.Transparent),
                     ItemsSource = (System.Collections.IEnumerable)HighScores.generateHighScoreTable((GameMap)mapsEnum.GetValue(i)).DefaultView,
             };
 
+                dataGrid.IsEnabled = false;
                 stackPanel.Children.Add(dataGrid);
 
                 Grid.SetRow(stackPanel, 0);
                 Grid.SetColumn(stackPanel, i);
                 grid.Children.Add(stackPanel);
-
-                if (i == numberOfColumns-1)
-                {
-                    Button exitButton = new Button
-                    {
-                        Content = "Back",
-                    };
-
-                    exitButton.Click += (sender, e) => { this.NavigationService.Navigate(new Uri("PageMenu.xaml", UriKind.Relative)); };
-                    stackPanel.Children.Add(exitButton);
-
-                }
             }
 
 
+            Button exitButton = new Button
+            {
+                Content = "Back",
+                Height = 104,
+                Width=198,
+                FontSize=22
+            };
+            exitButton.Click += (sender, e) => { this.NavigationService.Navigate(new Uri("PageMenu.xaml", UriKind.Relative)); };
 
+            Grid.SetRow(exitButton, 1); // Set row index to the last added row
+            Grid.SetColumn(exitButton, 1); // Set column index to the center column (assuming 4 columns, and 0-based indexing)
+            Grid.SetColumnSpan(exitButton, 2); // Set column span to cover the center two columns
+
+            grid.Children.Add(exitButton);
 
         }
 

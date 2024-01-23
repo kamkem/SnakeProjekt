@@ -83,7 +83,7 @@ namespace SnakeProjekt
                 conn.Open();
 
                 string map = gameMap.ToString();
-                string query = "Select TOP 5 Name, Score FROM HighScoreTable WHERE Map = @map ORDER BY Score DESC";
+                string query = "Select TOP 5 Name, Score, Level FROM HighScoreTable WHERE Map = @map ORDER BY Score DESC";
 
                 using (SqlCommand command3 = new SqlCommand(query, conn))
                 {
