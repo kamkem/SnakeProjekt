@@ -5,26 +5,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SnakeProjekt"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1054"
       Title="SettingsPage">
 
-    <Grid Background="LightSlateGray">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="23*"/>
-            <RowDefinition Height="27*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="401*"/>
-            <ColumnDefinition Width="399*"/>
-        </Grid.ColumnDefinitions>
-        <GroupBox x:Name="mazeGroupBox" HorizontalAlignment="Center" Height="138" Header="Maze" Margin="0,37,0,0" VerticalAlignment="Top" Width="353">
-            <StackPanel x:Name="stackPanelMap">
+    <StackPanel x:Name="stackPanelMain" Background="LightGoldenrodYellow">
+        <GroupBox x:Name="mapGroupBox" HorizontalAlignment="Center" Height="138" Header="Map" Background="AliceBlue" Margin="0,100,0,50" VerticalAlignment="Top"  Width="350" FontSize="20">
+            <StackPanel x:Name="stackPanelMap" VerticalAlignment="Center">
             </StackPanel>
         </GroupBox>
-        <Slider x:Name="sliderLevel" HorizontalAlignment="Left" Height="28" Margin="34,93,0,0" Grid.Row="1" VerticalAlignment="Top" Width="269" 
-                Maximum="10" Minimum="1" TickPlacement="Both" TickFrequency="1" IsSnapToTickEnabled="True"/>
-        <Label x:Name="labelLevel" Content="Label" HorizontalAlignment="Left" Margin="328,89,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Button x:Name="buttonReturn" Grid.Column="1" Content="Return" HorizontalAlignment="Left" Height="35" Margin="135,68,0,0" VerticalAlignment="Top" Width="39" Click="buttonReturn_Click"/>
-
-    </Grid>
+        <GroupBox x:Name="levelGroupBox" Width="350" Header="Level" Background="AliceBlue" FontSize="20">
+            <StackPanel>
+                <Label x:Name="labelLevel" Content="Label" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Slider x:Name="sliderLevel" HorizontalAlignment="Center" Height="28" Width="330" Margin="0, 0, 0, 5" 
+                    Maximum="10" Minimum="1" TickPlacement="Both" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="buttonReturn" Content="Return" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="104" Width="198" FontSize="22" Margin="0, 50, 0, 0" Click="buttonReturn_Click"/>
+    </StackPanel>
 </Page>

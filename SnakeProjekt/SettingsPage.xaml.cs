@@ -43,7 +43,8 @@ namespace SnakeProjekt
                 RadioButton radioButton = new RadioButton {
                     Content = enumValue.ToString(),
                     GroupName = radiobuttonGroupName,
-                    Tag = enumValue
+                    Tag = enumValue,
+                    FontSize=16
                 };
 
                 if (enumValue == GameProperties.gameMapSelected)
